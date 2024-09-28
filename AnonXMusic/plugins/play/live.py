@@ -28,9 +28,8 @@ async def play_live_stream(client, CallbackQuery, _):
     except:
         pass
 
-    # Yaha pe play_1 ki jagah sticker add ho raha hai
-    mystic = await client.send_sticker(
-        CallbackQuery.message.chat.id, "CAACAgUAAxkBAAEM5ANm9__qNeuF_CUru6KZOJNhVr6b-wACThMAApdqwVeqlE4go0_ydDYE"
+    mystic = await message.reply_text(
+        _["play_2"].format(channel) if channel else _["play_1"]
     )
 
     try:
