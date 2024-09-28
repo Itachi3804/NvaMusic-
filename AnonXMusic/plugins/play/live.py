@@ -1,11 +1,9 @@
 from pyrogram import filters
-
 from AnonXMusic import YouTube, app
 from AnonXMusic.utils.channelplay import get_channeplayCB
 from AnonXMusic.utils.decorators.language import languageCB
 from AnonXMusic.utils.stream.stream import stream
 from config import BANNED_USERS
-
 
 @app.on_callback_query(filters.regex("LiveStream") & ~BANNED_USERS)
 @languageCB
@@ -29,13 +27,17 @@ async def play_live_stream(client, CallbackQuery, _):
         await CallbackQuery.answer()
     except:
         pass
-    mystic = await CallbackQuery.message.reply_text(
-        _["play_2"].format(channel) if channel else _["play_1"]
+
+    # Yaha pe play_1 ki jagah sticker add ho raha hai
+    mystic = await client.send_sticker(
+        CallbackQuery.message.chat.id, "CAACAgUAAxkBAAEM5ANm9__qNeuF_CUru6KZOJNhVr6b-wACThMAApdqwVeqlE4go0_ydDYE"
     )
+
     try:
         details, track_id = await YouTube.track(vidid, True)
     except:
         return await mystic.edit_text(_["play_3"])
+    
     ffplay = True if fplay == "f" else None
     if not details["duration_min"]:
         try:
@@ -57,4 +59,5 @@ async def play_live_stream(client, CallbackQuery, _):
             return await mystic.edit_text(err)
     else:
         return await mystic.edit_text("» ɴᴏᴛ ᴀ ʟɪᴠᴇ sᴛʀᴇᴀᴍ.")
+    
     await mystic.delete()
