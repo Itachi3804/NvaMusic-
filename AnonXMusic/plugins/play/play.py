@@ -56,7 +56,6 @@ async def play_commnd(
     mystic = await client.send_sticker(
     CallbackQuery.message.chat.id, "CAACAgUAAxkBAAEM5ANm9__qNeuF_CUru6KZOJNhVr6b-wACThMAApdqwVeqlE4go0_ydDYE"
 )
-    )
     plist_id = None
     slider = None
     plist_type = None
